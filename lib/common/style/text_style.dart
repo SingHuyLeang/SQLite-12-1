@@ -10,7 +10,8 @@ class NText extends StatelessWidget {
     this.weight,
     this.wrap,
     this.overflow,
-    this.family = 'poppins-r'
+    this.family = 'poppins-r',
+    this.lines = 1,
   });
   final String text;
   final double? size;
@@ -19,6 +20,7 @@ class NText extends StatelessWidget {
   final bool? wrap;
   final TextOverflow? overflow;
   final String family;
+  final int lines;
   @override
   Widget build(BuildContext context) {
     return Text(
@@ -31,6 +33,7 @@ class NText extends StatelessWidget {
       ),
       softWrap: wrap,
       overflow: overflow,
+      maxLines: lines,
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:note_app/common/style/colors.dart';
 import 'package:note_app/common/style/text_style.dart';
 
@@ -22,6 +23,15 @@ class NAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: showBackArrow,
+      leading: showBackArrow
+          ? IconButton(
+              onPressed: () => Get.back(),
+              icon: Icon(
+                Icons.adaptive.arrow_back,
+                color: NColors.light,
+              ),
+            )
+          : null,
       backgroundColor: showBackgroud ? NColors.primary : null,
       centerTitle: center,
       title: NText(
