@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:note_app/common/component/n_app_bar.dart';
 import 'package:note_app/common/component/text_filed.dart';
 import 'package:note_app/common/style/colors.dart';
@@ -8,8 +9,9 @@ import 'package:note_app/feature/app/controller/note_controller.dart';
 
 class FormNote extends StatelessWidget {
   FormNote({super.key});
-  final title = TextEditingController();
-  final note = TextEditingController();
+
+  final controller = Get.put(NoteController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,16 +24,15 @@ class FormNote extends StatelessWidget {
           children: [
             // title
             NField(
-              color: NColors.dark,
               size: 18,
-              controller: title,
+              controller: controller.titleController,
               hint: "Title",
             ),
             // note
             NField(
               color: NColors.grey,
               size: 18,
-              controller: note,
+              controller: controller.noteController,
               hint: "Note",
             ),
             // date
@@ -39,14 +40,14 @@ class FormNote extends StatelessWidget {
               width: double.infinity,
               alignment: Alignment.centerRight,
               margin: const EdgeInsets.only(right: 8),
-              child: NText(text: NoteController.date(), color: NColors.grey),
+              child: NText(text: controller.currentDate(), color: NColors.grey),
             ),
             // save
             const SizedBox(height: 15),
             CupertinoButton(
               color: NColors.primary,
               child: const NText(text: 'Save', color: NColors.light),
-              onPressed: () {},
+              onPressed: () => controller.addNote(),
             ),
           ],
         ),

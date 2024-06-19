@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/common/style/colors.dart';
 
 class NField extends StatelessWidget {
   const NField({
@@ -7,7 +8,7 @@ class NField extends StatelessWidget {
     this.h,
     required this.controller,
     required this.hint,
-    required this.color,
+    this.color = NColors.dark,
     required this.size,
     this.lines = 1,
   });

@@ -4,11 +4,14 @@ import 'package:note_app/common/component/card_view.dart';
 import 'package:note_app/common/component/icon_button.dart';
 import 'package:note_app/common/component/n_app_bar.dart';
 import 'package:note_app/common/style/colors.dart';
+import 'package:note_app/feature/app/controller/note_controller.dart';
 import 'package:note_app/feature/app/model/note_model.dart';
 import 'package:note_app/feature/app/view/form/form.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+
+  final controller = Get.put(NoteController());
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +24,7 @@ class HomeScreen extends StatelessWidget {
       ),
       body: ListView(
         children: List.generate(
-          5,
+          controller.notes.length,
           (index) => Padding(
             padding: const EdgeInsets.only(
               left: 8,
@@ -31,11 +34,10 @@ class HomeScreen extends StatelessWidget {
             ),
             child: NCard(
               note: NoteModel(
-                id: 1,
-                title: "Title",
-                note:
-                    "NoteModel({required int id, required String title, required String note, required String date})",
-                date: "17-06-2024",
+                id: controller.notes[index].id,
+                title: controller.notes[index].title,
+                note: controller.notes[index].note,
+                date: controller.notes[index].date,
               ),
             ),
           ),
