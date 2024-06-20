@@ -22,22 +22,24 @@ class HomeScreen extends StatelessWidget {
           NIcon(icon: "assets/icons/search.png"),
         ],
       ),
-      body: ListView(
-        children: List.generate(
-          controller.notes.length,
-          (index) => Padding(
-            padding: const EdgeInsets.only(
-              left: 8,
-              right: 8,
-              top: 8,
-              bottom: 0,
-            ),
-            child: NCard(
-              note: NoteModel(
-                id: controller.notes[index].id,
-                title: controller.notes[index].title,
-                note: controller.notes[index].note,
-                date: controller.notes[index].date,
+      body: Obx(
+        () => ListView(
+          children: List.generate(
+            controller.notes.length,
+            (index) => Padding(
+              padding: const EdgeInsets.only(
+                left: 8,
+                right: 8,
+                top: 8,
+                bottom: 0,
+              ),
+              child: NCard(
+                note: NoteModel(
+                  id: controller.notes[index].id,
+                  title: controller.notes[index].title,
+                  note: controller.notes[index].note,
+                  date: controller.notes[index].date,
+                ),
               ),
             ),
           ),

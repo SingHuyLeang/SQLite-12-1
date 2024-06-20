@@ -10,8 +10,13 @@ import 'package:note_app/feature/app/model/note_model.dart';
 class NoteController extends GetxController {
   @override
   void onInit() {
-    NoteDatabase().init().whenComplete(() => log("Success"));
+    get();
     super.onInit();
+  }
+
+  Future<void> get() async {
+    notes.clear();
+    await NoteDatabase().getAll().then((value) => notes.addAll(value));
   }
 
   final RxList<NoteModel> notes = <NoteModel>[].obs;
@@ -32,8 +37,10 @@ class NoteController extends GetxController {
                 title: titleController.text,
                 note: noteController.text,
                 date: currentDate()))
-            .whenComplete(
-                () => Loader.successSnackBar(message: "Note is added"));
+            .whenComplete(() {
+          get();
+          Loader.successSnackBar(message: "Note is added");
+        });
       } else {
         Loader.warningSnackBar(message: "Please enter all field");
       }

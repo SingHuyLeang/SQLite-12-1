@@ -42,7 +42,12 @@ class NoteDatabase {
 
   Future<int> insert(NoteModel note) async {
     final db = await init();
-    return db.insert(tableName,note.toMap());
+    return db.insert(tableName, note.toMap());
   }
 
+  Future<List<NoteModel>> getAll() async {
+    final db = await init();
+    List<Map<String, dynamic>> list = await db.query(tableName);
+    return list.map((e) => NoteModel.fromMap(e)).toList();
+  }
 }
