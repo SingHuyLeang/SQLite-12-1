@@ -7,6 +7,7 @@ import 'package:note_app/common/popuns/loader.dart';
 import 'package:note_app/database/note_db.dart';
 import 'package:note_app/feature/app/model/note_model.dart';
 import 'package:note_app/feature/app/view/form/form.dart';
+import 'package:note_app/feature/app/view/home/home_screen.dart';
 
 class NoteController extends GetxController {
   @override
@@ -41,7 +42,7 @@ class NoteController extends GetxController {
                 note: noteController.text,
                 date: currentDate()))
             .whenComplete(() {
-          getNote();
+          getNote().whenComplete(() => Get.to(() => HomeScreen()));
           Loader.successSnackBar(message: "Note is added");
         });
       } else {
@@ -66,7 +67,7 @@ class NoteController extends GetxController {
                 note: noteController.text,
                 date: currentDate()))
             .whenComplete(() {
-          getNote();
+          getNote().whenComplete(() => Get.to(() => HomeScreen()));
           Loader.successSnackBar(message: "Note is updated");
         });
       } else {
