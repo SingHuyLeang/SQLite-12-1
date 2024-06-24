@@ -50,4 +50,15 @@ class NoteDatabase {
     List<Map<String, dynamic>> list = await db.query(tableName);
     return list.map((e) => NoteModel.fromMap(e)).toList();
   }
+
+  Future<bool> update(NoteModel note) async {
+    final db = await init();
+    int i = await db.update(
+      tableName,
+      note.toMap(),
+      where: '$colId = ?',
+      whereArgs: [note.id],
+    );
+    return i > 0;
+  }
 }

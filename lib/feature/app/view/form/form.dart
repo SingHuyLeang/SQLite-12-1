@@ -8,8 +8,8 @@ import 'package:note_app/common/style/text_style.dart';
 import 'package:note_app/feature/app/controller/note_controller.dart';
 
 class FormNote extends StatelessWidget {
-  FormNote({super.key});
-
+  FormNote({super.key, this.isUpdate = false});
+  final bool isUpdate;
   final controller = Get.put(NoteController());
 
   @override
@@ -47,7 +47,7 @@ class FormNote extends StatelessWidget {
             CupertinoButton(
               color: NColors.primary,
               child: const NText(text: 'Save', color: NColors.light),
-              onPressed: () => controller.addNote(),
+              onPressed: () => !isUpdate ? controller.addNote() : controller.updateNote(),
             ),
           ],
         ),
