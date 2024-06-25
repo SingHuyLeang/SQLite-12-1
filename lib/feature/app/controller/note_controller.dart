@@ -90,4 +90,16 @@ class NoteController extends GetxController {
     Get.to(() => FormNote(isUpdate: true));
     update();
   }
+
+  deleteNote(NoteModel model) async {
+    try {
+      NoteDatabase().delete(model).whenComplete(() {
+        getNote();
+        Loader.successSnackBar(message: "Note is deleted");
+      });
+    } catch (e) {
+      Loader.errorSnackBar(message: "Something want wrong");
+      log("Error ${e.toString()}");
+    }
+  }
 }

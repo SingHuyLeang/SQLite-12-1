@@ -61,4 +61,9 @@ class NoteDatabase {
     );
     return i > 0;
   }
+  Future<bool> delete(NoteModel note) async {
+    final db = await init();
+    int i = await db.delete(tableName,where: '$colId = ?',whereArgs: [note.id]);
+    return i > 0;
+  }
 }
