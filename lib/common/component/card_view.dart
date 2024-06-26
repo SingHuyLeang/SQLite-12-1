@@ -17,7 +17,6 @@ class NCard extends StatelessWidget {
         motion: const ScrollMotion(),
         children: [
           SlidableAction(
-            // An action can be bigger than the others.
             flex: 2,
             onPressed: (context) async => controller.deleteNote(note),
             backgroundColor: Colors.red,

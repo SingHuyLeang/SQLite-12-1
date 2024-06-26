@@ -11,13 +11,17 @@ class NField extends StatelessWidget {
     this.color = NColors.dark,
     required this.size,
     this.lines = 1,
+    this.border = false,
+    this.onChanged,
   });
   final TextEditingController controller;
   final double? h, w;
   final String hint;
   final Color color;
   final double size;
+  final bool border;
   final int lines;
+  final Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,8 +33,12 @@ class NField extends StatelessWidget {
         style: textStyle(color, size),
         minLines: lines,
         maxLines: null,
+        onChanged: onChanged,
         decoration: InputDecoration(
-          border: InputBorder.none,
+          border: !border? InputBorder.none : OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: const BorderSide(color: NColors.grey),
+          ),
           hintText: hint,
           hintStyle: textStyle(color, size),
         ),

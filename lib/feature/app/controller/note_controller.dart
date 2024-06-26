@@ -22,10 +22,13 @@ class NoteController extends GetxController {
   }
 
   final RxList<NoteModel> notes = <NoteModel>[].obs;
+  final RxList<NoteModel> fielterNoted = <NoteModel>[].obs;
 
   final titleController = TextEditingController();
   final noteController = TextEditingController();
+  final fielterController = TextEditingController();
   late int dtoId;
+  String? selectedValue;
 
   String currentDate() {
     DateTime date = DateTime.now();
@@ -101,5 +104,28 @@ class NoteController extends GetxController {
       Loader.errorSnackBar(message: "Something want wrong");
       log("Error ${e.toString()}");
     }
+  }
+
+  void onFielterTextChange(String value) async {
+    if (value.isEmpty) {
+      fielterNoted.clear();
+    } else {
+      if (selectedValue == "Title") {
+        for (var note in notes) {
+          if (value.toLowerCase() == note.title.toLowerCase()) {
+            log('title = ${note.title}');
+            fielterNoted.add(note);
+          }
+        }
+      } else if (selectedValue == "Note") {
+        for (var note in notes) {
+          if (value.toLowerCase() == note.note.toLowerCase()) {
+            log('title = ${note.title}');
+            fielterNoted.add(note);
+          }
+        }
+      }
+    }
+    update();
   }
 }

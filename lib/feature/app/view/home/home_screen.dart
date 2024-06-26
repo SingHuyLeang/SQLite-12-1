@@ -6,6 +6,7 @@ import 'package:note_app/common/component/n_app_bar.dart';
 import 'package:note_app/common/style/colors.dart';
 import 'package:note_app/feature/app/controller/note_controller.dart';
 import 'package:note_app/feature/app/model/note_model.dart';
+import 'package:note_app/feature/app/view/form/fielter.dart';
 import 'package:note_app/feature/app/view/form/form.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -16,10 +17,13 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const NAppBar(
+      appBar: NAppBar(
         title: "Note App",
         actions: [
-          NIcon(icon: "assets/icons/search.png"),
+          NIcon(
+            icon: "assets/icons/search.png",
+            even: () => Get.to(() => FielterScreen()),
+          ),
         ],
       ),
       body: Obx(
